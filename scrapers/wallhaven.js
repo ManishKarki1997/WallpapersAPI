@@ -1,5 +1,6 @@
 const cheerio = require("cheerio");
 const getHTML = require("../helpers/getHTML");
+const saveWallpaper = require("../helpers/saveWallpaper");
 const url = "https://wallhaven.cc/toplist?page=";
 let pageIndex = 1;
 
@@ -14,15 +15,18 @@ async function scrapeWallhaven(url, pageIndex) {
     const wallpaperId = $(el).children("figure").attr("data-wallpaper-id");
     const wallSubId = wallpaperId.substring(0, 2);
     const fullWallpaperUrl = `https://w.wallhaven.cc/full/${wallSubId}/wallhaven-${wallpaperId}.${imgExt}`;
-    const wallSrcUrl = $(el).find("a.preview").attr("href");
+    const srcUrl = $(el).find("a.preview").attr("href");
 
     const image = {
       previewWallpaper,
-      wallSrcUrl,
+      srcUrl,
       fullWallpaperUrl,
     };
+
     images.push(image);
   });
+
+  saveWallpaper(images);
 }
 
-scrapeWallhaven(url, pageIndex);
+module.exports = scrapeWallhaven;
