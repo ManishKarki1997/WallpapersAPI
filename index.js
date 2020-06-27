@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
+const cron = require("node-cron");
 dotenv.config();
 
 const { Wallpaper } = require("./models");
@@ -47,8 +48,12 @@ app.listen(PORT, (err) => {
   console.log("Server running on port", PORT);
 });
 
-// const url = "https://wallhaven.cc";
-// let pageIndex = 2;
-// const filter = "latest";
+// cron.schedule("* * * * *", () => {
+//   console.log("running every minute");
+// });
 
-// ScrapeWallhaven(url, filter, pageIndex);
+const url = "https://wallhaven.cc";
+let pageIndex = 13200;
+const filter = "latest";
+
+ScrapeWallhaven(url, filter, pageIndex);

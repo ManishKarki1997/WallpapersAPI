@@ -24,7 +24,6 @@ async function scrapeWallhaven(url, filter, pageIndex) {
       wallpaperDomain: "https://wallhaven.cc",
       dateAdded: Date.now(),
     };
-
     images.push(image);
   });
 

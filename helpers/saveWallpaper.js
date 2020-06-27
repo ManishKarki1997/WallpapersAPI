@@ -2,6 +2,10 @@ const { Wallpaper } = require("../models");
 
 async function saveWallpaper(wallpapers) {
   try {
+    if (wallpapers.length === 0) {
+      return;
+    }
+
     // fetch existing wallpapers for that domain
     const savedWallpapers = await Wallpaper.find({ wallpaperDomain: wallpapers[0].wallpaperDomain }).sort({ dateAdded: -1 });
 
