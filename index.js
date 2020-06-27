@@ -47,7 +47,8 @@ app.listen(PORT, (err) => {
   console.log("Server running on port", PORT);
 });
 
-// const url = "https://wallhaven.cc/toplist?page=";
-// let pageIndex = 1;
+// const url = "https://wallhaven.cc";
+// let pageIndex = 2;
+// const filter = "latest";
 
-// ScrapeWallhaven(url, pageIndex);
+// ScrapeWallhaven(url, filter, pageIndex);

@@ -4,8 +4,8 @@ const saveWallpaper = require("../helpers/saveWallpaper");
 const url = "https://wallhaven.cc/toplist?page=";
 let pageIndex = 1;
 
-async function scrapeWallhaven(url, pageIndex) {
-  const html = await getHTML(url + pageIndex);
+async function scrapeWallhaven(url, filter, pageIndex) {
+  const html = await getHTML(`${url}/${filter}?page=${pageIndex}`);
   const $ = cheerio.load(html);
   let images = [];
 
@@ -21,6 +21,8 @@ async function scrapeWallhaven(url, pageIndex) {
       previewWallpaper,
       srcUrl,
       fullWallpaperUrl,
+      wallpaperDomain: "https://wallhaven.cc",
+      dateAdded: Date.now(),
     };
 
     images.push(image);
