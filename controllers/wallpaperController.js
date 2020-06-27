@@ -11,8 +11,10 @@ Router.get("/", async (req, res) => {
   const sortType = sortByDate === "latest" ? "descending" : "ascending";
 
   try {
+    // total documents count
     const totalDocuments = await Wallpaper.countDocuments();
 
+    // pagination "logic"
     const wallpapers = await Wallpaper.find({})
       .sort({ dateAdded: sortType })
       .skip(page * count)

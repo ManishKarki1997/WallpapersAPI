@@ -11,7 +11,6 @@ async function saveWallpaper(wallpapers) {
 
     // filter out new wallpapers from existing wallpapers in the database
     const newWalls = wallpapers.filter((wall) => !savedWallpapers.find((oldWall) => oldWall.fullWallpaperUrl === wall.fullWallpaperUrl));
-
     // only save if there is a new wallpaper available
     if (newWalls.length > 0) {
       await Wallpaper.collection.insertMany(newWalls, function (err, docs) {

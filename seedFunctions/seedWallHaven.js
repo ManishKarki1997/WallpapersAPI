@@ -1,10 +1,15 @@
 const { ScrapeWallhaven } = require("../scrapers");
 
-async function seedWallhaven() {
+async function seedWallhaven(totalPages) {
   const totalURLs = [];
 
-  // for now, scrape 300 pages to seed for this domain
-  for (let i = 10; i <= 300; i++) {
+  // run for however pages to scrape
+
+  // --------------------- //
+  // using this function to run every x hours, to scrape 'totalPages' pages
+  // --------------------- //
+
+  for (let i = 1; i <= totalPages; i++) {
     totalURLs.push({
       domain: "https://wallhaven.cc",
       filter: "latest",
