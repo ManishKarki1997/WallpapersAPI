@@ -1,12 +1,16 @@
 const cheerio = require("cheerio");
 const getHTML = require("../helpers/getHTML");
 const saveWallpaper = require("../helpers/saveWallpaper");
-const url = "https://wallhaven.cc/toplist?page=";
-let pageIndex = 1;
+// const url = "https://wallhaven.cc/toplist?page=";
+// let pageIndex = 1;
 
 async function scrapeWallhaven(url, filter, pageIndex) {
-  const html = await getHTML(`${url}/${filter}?page=${pageIndex}`);
-  const $ = cheerio.load(html);
+  const res = await getHTML(`${url}/${filter}?page=${pageIndex}`);
+  if (res.error) {
+    return;
+  }
+
+  const $ = cheerio.load(res);
   let images = [];
 
   $(".thumb-listing-page ul li").each(function (i, el) {

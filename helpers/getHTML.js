@@ -5,10 +5,13 @@ async function getHTML(url) {
     const res = await axios.get(url);
     return res.data;
   } catch (error) {
-    if (error.response.status === 500) {
+    if (error.response && error.response.status === 500) {
       console.error("Error: Status 500");
-      console.log(error.response.status);
     }
+    console.log(error);
+    return {
+      error: true,
+    };
   }
 }
 

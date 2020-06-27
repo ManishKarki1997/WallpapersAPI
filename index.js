@@ -9,6 +9,7 @@ dotenv.config();
 
 const { Wallpaper } = require("./models");
 const { ScrapeWallhaven } = require("./scrapers");
+const seedWallhaven = require("./seedFunctions/seedWallHaven");
 
 app.use(
   bodyParser.urlencoded({
@@ -52,8 +53,10 @@ app.listen(PORT, (err) => {
 //   console.log("running every minute");
 // });
 
+seedWallhaven();
+
 // const url = "https://wallhaven.cc";
-// let pageIndex = 13200;
+// let pageIndex = 30000000000;
 // const filter = "latest";
 
 // ScrapeWallhaven(url, filter, pageIndex);
