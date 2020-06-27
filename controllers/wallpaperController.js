@@ -4,12 +4,30 @@ const Router = express.Router();
 const { Wallpaper } = require("../models");
 
 Router.get("/", async (req, res) => {
+  const page = parseInt(req.query.page) || 0;
+  const count = parseInt(req.query.count) || 10;
+  const sortByDate = req.query.sortByDate || "DESC";
+
+  const sortType = sortByDate === "latest" ? "descending" : "ascending";
+
   try {
-    const wallpapers = await Wallpaper.find({});
+    const totalDocuments = await Wallpaper.countDocuments();
+
+    const wallpapers = await Wallpaper.find({})
+      .sort({ dateAdded: sortType })
+      .skip(page * count)
+      .limit(count);
+
     return res.send({
       error: false,
       message: "Wallpapers fetched successfully",
-      payload: wallpapers,
+      payload: {
+        wallpapers,
+        totalPages: Math.floor(totalDocuments / count),
+        currentPage: page,
+        prev: page == 0 ? false : true,
+        next: page < Math.floor(totalDocuments / count) ? true : false,
+      },
     });
   } catch (error) {
     console.error(error);

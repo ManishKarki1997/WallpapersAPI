@@ -52,8 +52,8 @@ app.listen(PORT, (err) => {
 //   console.log("running every minute");
 // });
 
-const url = "https://wallhaven.cc";
-let pageIndex = 13200;
-const filter = "latest";
+// const url = "https://wallhaven.cc";
+// let pageIndex = 13200;
+// const filter = "latest";
 
-ScrapeWallhaven(url, filter, pageIndex);
+// ScrapeWallhaven(url, filter, pageIndex);
