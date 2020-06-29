@@ -63,6 +63,6 @@ cron.schedule(everyFourHour, () => {
   // ScrapeWallhaven(url, filter, pageIndex, totalPages);
 });
 
-// seedWallhaven();
+seedWallhaven(200);
 
-// ScrapeWallhaven(url, filter, pageIndex);
+// ScrapeWallhaven("https://wallhaven.cc", "latest", 1);

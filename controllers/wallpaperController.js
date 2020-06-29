@@ -20,7 +20,7 @@ Router.get("/", async (req, res) => {
       .skip(page * count)
       .limit(count);
 
-    return res.send({
+    return res.status(200).send({
       error: false,
       message: "Wallpapers fetched successfully",
       payload: {

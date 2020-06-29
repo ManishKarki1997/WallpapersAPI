@@ -4,7 +4,8 @@
   "description": "Wallpapers API. Also scrapes wallpapers from various sources",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "Manish Karki",
   "license": "ISC",
