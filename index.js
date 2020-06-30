@@ -7,7 +7,6 @@ const app = express();
 const cron = require("node-cron");
 dotenv.config();
 
-const { ScrapeWallhaven } = require("./scrapers");
 const seedWallhaven = require("./seedFunctions/seedWallHaven");
 
 app.use(
@@ -26,9 +25,9 @@ const MONGODB_URI = "mongodb://localhost:27017/wallpapersapp";
 const { WallpaperController } = require("./controllers");
 
 const url = "https://wallhaven.cc";
-let pageIndex = 30000000000;
+let pageIndex = 1;
 const filter = "latest";
-const totalPages = 3;
+const totalPages = 2;
 
 app.get("/", (req, res) => {
   res.send("Welcome to the API.");
@@ -63,6 +62,4 @@ cron.schedule(everyFourHour, () => {
   // ScrapeWallhaven(url, filter, pageIndex, totalPages);
 });
 
-// seedWallhaven(200);
-
-// ScrapeWallhaven("https://wallhaven.cc", "latest", 1);
+// seedWallhaven(30);

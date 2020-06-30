@@ -1,8 +1,14 @@
 const cheerio = require("cheerio");
 const getHTML = require("../helpers/getHTML");
 const saveWallpaper = require("../helpers/saveWallpaper");
+const getFullWallpaperDetails = require("../helpers/getFullWallpaperDetails");
 // const url = "https://wallhaven.cc/toplist?page=";
 // let pageIndex = 1;
+
+// function to sleep for certain milliseconds
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 async function scrapeWallhaven(url, filter, pageIndex) {
   const res = await getHTML(`${url}/${filter}?page=${pageIndex}`);
@@ -13,7 +19,7 @@ async function scrapeWallhaven(url, filter, pageIndex) {
   const $ = cheerio.load(res);
   let images = [];
 
-  $(".thumb-listing-page ul li").each(function (i, el) {
+  $(".thumb-listing-page ul li").each(async function (i, el) {
     const previewWallpaper = $(el).find("img").attr("data-src");
     // const imgExt = previewWallpaper.split(".")[3];
     let imgExt = "jpg";
@@ -28,6 +34,10 @@ async function scrapeWallhaven(url, filter, pageIndex) {
     }
     const fullWallpaperUrl = `https://w.wallhaven.cc/full/${wallSubId}/wallhaven-${wallpaperId}.${imgExt}`;
 
+    // const wallpaperMetaInfo = await getFullWallpaperDetails(srcUrl);
+    // console.log(wallpaperMetaInfo);
+    // return;
+
     const image = {
       previewWallpaper,
       srcUrl,
@@ -37,8 +47,7 @@ async function scrapeWallhaven(url, filter, pageIndex) {
     };
     images.push(image);
   });
-
-  saveWallpaper(images);
+  return images;
 }
 
 module.exports = scrapeWallhaven;

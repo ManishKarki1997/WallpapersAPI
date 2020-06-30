@@ -16,14 +16,28 @@ const WallpaperSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: {
+  uploadedDate: {
+    type: Date,
+  },
+  uploaderName: {
+    type: String,
+    required: true,
+  },
+  uploaderAvatar: {
+    type: String,
+    required: true,
+  },
+  views: {
     type: Number,
     default: 0,
   },
+  tags: [],
   dateAdded: {
     type: Date,
     default: Date.now,
   },
 });
+
+WallpaperSchema.index({ views: 1, tags: 1 });
 
 module.exports = mongoose.model("Wallpaper", WallpaperSchema);
