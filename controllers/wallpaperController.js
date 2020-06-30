@@ -92,7 +92,6 @@ Router.get("/category/:categoryId", async (req, res) => {
   const popularSort = filterQuery == "popular" ? -1 : 1;
   try {
     const totalDocuments = await Wallpaper.find({ tags: { $elemMatch: { tagId: req.params.categoryId } } });
-
     Wallpaper.find({ tags: { $elemMatch: { tagId: req.params.categoryId } } })
       .sort({ views: popularSort })
       .skip(page * count)

@@ -1,7 +1,7 @@
 const { ScrapeWallhaven } = require("../scrapers");
 const ScrapeDetailedWallpaperInfo = require("../scrapers/ScrapeWallpaperInfo");
 
-async function seedWallhaven(totalPages) {
+async function seedWallhaven(categoryId, totalPages) {
   const totalURLs = [];
 
   // run for however pages to scrape
@@ -27,7 +27,7 @@ async function seedWallhaven(totalPages) {
       await sleep(90000);
 
       // ScrapeWallhaven(totalURLs[i].domain, totalURLs[i].filter, totalURLs[i].pageIndex);
-      ScrapeDetailedWallpaperInfo(totalURLs[i].domain, totalURLs[i].filter, totalURLs[i].pageIndex);
+      ScrapeDetailedWallpaperInfo(categoryId, totalURLs[i].domain, totalURLs[i].filter, totalURLs[i].pageIndex);
     }
   }, 4000);
 }

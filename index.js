@@ -58,8 +58,8 @@ const everyMinute = "* * * * *";
 const everyTwoMinute = "*/2 * * * *";
 
 cron.schedule(everyFourHour, () => {
-  seedWallhaven(totalPages);
+  seedWallhaven(null, totalPages);
   // ScrapeWallhaven(url, filter, pageIndex, totalPages);
 });
 
-// seedWallhaven(30);
+// seedWallhaven(2278, 10);
