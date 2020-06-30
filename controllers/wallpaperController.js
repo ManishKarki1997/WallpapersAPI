@@ -83,4 +83,39 @@ Router.get("/similar/:wallpaperId", async (req, res) => {
   }
 });
 
+// get wallpapers for a category
+Router.get("/category/:categoryId", async (req, res) => {
+  const page = parseInt(req.query.page) || 0;
+  const count = parseInt(req.query.count) || 20;
+  const filterQuery = req.query.filter || "latest";
+
+  const popularSort = filterQuery == "popular" ? -1 : 1;
+  try {
+    const totalDocuments = await Wallpaper.find({ tags: { $elemMatch: { tagId: req.params.categoryId } } });
+
+    Wallpaper.find({ tags: { $elemMatch: { tagId: req.params.categoryId } } })
+      .sort({ views: popularSort })
+      .skip(page * count)
+      .limit(count)
+      .exec(function (err, docs) {
+        return res.send({
+          error: false,
+          payload: {
+            wallpapers: docs,
+            totalPages: Math.floor(totalDocuments.length / count) == 0 ? 1 : Math.floor(totalDocuments.length / count),
+            currentPage: page,
+            prev: page == 0 ? false : true,
+            next: page < Math.floor(totalDocuments.length / count) ? true : false,
+          },
+        });
+      });
+  } catch (error) {
+    console.log(error);
+    return res.send({
+      error: true,
+      message: "Failed to fetch wallpapers for that category.",
+    });
+  }
+});
+
 module.exports = Router;
