@@ -10,6 +10,9 @@ function sleep(ms) {
 async function ScrapeDetailedWallpaperInfo(categoryId, url, filter, pageIndex) {
   console.log("scraping " + url + "/" + filter + "?pageIndex=" + pageIndex);
   const basicInfo = await ScrapeWallhaven(categoryId, url, filter, pageIndex);
+  if (!basicInfo) {
+    return;
+  }
   let allWallpapers = [];
   for (let i = 0; i < basicInfo.length; i++) {
     await sleep(3000);

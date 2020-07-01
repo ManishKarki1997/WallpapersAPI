@@ -10,7 +10,8 @@ async function seedWallhaven(categoryId, totalPages) {
   // using this function to run every x hours, to scrape 'totalPages' pages
   // --------------------- //
 
-  for (let i = 1; i <= totalPages; i++) {
+  // for (let i = 1; i <= totalPages; i++) {
+  for (let i = totalPages; i <= totalPages + 300; i++) {
     totalURLs.push({
       domain: "https://wallhaven.cc",
       filter: "toplist",

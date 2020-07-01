@@ -12,7 +12,6 @@ function sleep(ms) {
 
 async function scrapeWallhaven(categoryId, url, filter, pageIndex) {
   const scrapeUrl = categoryId === null ? `${url}/${filter}?page=${pageIndex}` : `${url}/search?q=id%3A${categoryId}&sorting=toplist?page=${pageIndex}`;
-  console.log(scrapeUrl);
   const res = await getHTML(scrapeUrl);
   if (res.error) {
     return;

@@ -67,7 +67,7 @@ Router.get("/similar/:wallpaperId", async (req, res) => {
         tagId: tag.tagId,
       };
     });
-    const similarWallpapers = await Wallpaper.find({ tags: { $elemMatch: { $or: tagIds } } }).limit(8);
+    const similarWallpapers = await Wallpaper.find({ tags: { $elemMatch: { $or: tagIds } } }).limit(12);
     return res.send({
       error: false,
       payload: {
